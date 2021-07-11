@@ -18,6 +18,12 @@ void Robot::RobotInit()
 
 
 void Robot::RobotPeriodic(){
+    LEDS.Periodic(robotData);
+    if (IsAutonomousEnabled()) {
+        robotData.autonEnabled = true;
+    } else {
+        robotData.autonEnabled = false;
+    }
     if (!IsDisabled()) {
         db.Periodic(robotData, diagnosticsData);
         intake.Periodic(robotData, diagnosticsData);
